@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>eMousika 注册</title>
+<link rel="stylesheet" type="text/css" href="{% static 'student/css/hui.css' %}" />
+<script src="{% static 'student/js/hui.js' %}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="{% static '/student/js/hui-form.js' %}"></script>
+</head>
+<body style="background-image: url({% static 'student/img/loginBackground.jpg' %}">
+
+<div class="hui-wrap">
+
+	<form class="hui-form hui-fr" id="form1" style="padding:28px 10px; width: 500px; margin-right: 200px; margin-top: 250px;"  action="{% url 'student:register' %}" method="post">
+        {% csrf_token %}
+        <div class="hui-common-title" style=" font-size: 24px; color: #3388FF; font-weight: 700; padding-top: 20px;" >eMousika 教学系统</div>
+        <div class="hui-form-items">
+            <div class="hui-form-items-title" >用户名</div>
+            <input type="text" class="hui-input hui-input-clear" name="username" placeholder="用户名" checkType="string" checkData="2,10" checkMsg="用户名应为2-10个字符" />
+        </div>
+        <div class="hui-form-items">
+            <div class="hui-form-items-title">登录密码</div>
+            <input type="password" class="hui-input hui-pwd-eye" name = "password" placeholder="登录密码" checkType="string" id="pwd" checkData="6,20"  checkMsg="密码应为6-20个字符" />
+        </div>
+        <div class="hui-form-items">
+            <div class="hui-form-items-title">登录密码</div>
+            <input type="password" class="hui-input hui-pwd-eye" placeholder="确认密码" checkType="sameWithId" checkData="pwd" checkMsg="两次密码不一致"  />
+        </div>
+        <div class="hui-form-items">
+            <div class="hui-form-items-title">邮箱</div>
+            <input type="email" class="hui-input hui-input-clear" name="email"  placeholder="您的邮箱" checkType = "email" checkMsg = "邮箱不合法"/>
+        </div>
+        <div style="margin-top: 20px; margin-left: 60px; margin-right: 60px;padding-bottom: 10px;">
+            <button type="button" class="hui-button hui-primary hui-center-title" id="register">注册</button>
+            <a href="{% url 'student:login' %}">
+            <button type="button" class="hui-button hui-primary hui-center-title" id="submitBtn">登录</button>
+            </a>
+        </div>
+    </form>
+
+    {% if flag %}
+        <script>
+            hui.iconToast("用户已存在","warn");
+        </script>
+    {% endif %}
+
+</div>
+
+<script type="text/javascript">
+hui.formInit();
+//表单验证
+hui('#register').click(function(){
+    var res = huiFormCheck('#form1');
+    //提交
+    if(res){
+        hui("#form1").dom[0].submit();
+    }
+});
+
+</script>
+</body>
+</html>

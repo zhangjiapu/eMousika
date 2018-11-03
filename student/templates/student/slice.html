@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="./css/hui.css" />
+</head>
+<body style="background-color: #ffffff;" onload="getMaterial()">
+<div class="hui-wrap" style="height: 100%;">
+	
+	<div class="hui-common-title" style="margin-top:15px;">
+			<div class="hui-common-title-line"></div>
+			<div class="hui-common-title-txt " style="font-size: 40px;">课件下载</div>
+			<div class="hui-common-title-line"></div>
+	</div>
+
+	<!--课件列表-->	
+	<div style="margin-top: 50px; margin-left: 300px; margin-right: 300px; padding-bottom: 5px; height: 50px;" class="hui-flex hui-primary" id="material">				
+		<label style="margin-left: 100px; color: #ffffff; padding: 16px;" id="title">title</label>
+		<label style="margin-left: 300px; margin-right: 300px; color: #ffffff; padding: 16px;" id="slice">slice_link</label>
+		<label style="color: #ffffff; padding: 16px;" id="date">upload_date</label>
+	</div>        
+
+</div>
+
+<script src="./js/hui.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="./js/hui-accordion.js"></script>
+<script src="./js/hui-tab.js" type="text/javascript"></script>
+<script type="text/javascript" src="./js/hui-form.js"></script>
+<script type="text/javascript">
+
+var data;
+//页面接加载的时候请求课件数据，用作展示
+function getMaterial(){
+	var url = "http://127.0.0.1:8000/api/material/;"
+	hui.getJSON(url,function(msg){
+		hui.toast(msg);
+	},
+	function(e){
+		hui.toast(e);
+	});
+}
+
+
+</script>
+</body>
+</html>

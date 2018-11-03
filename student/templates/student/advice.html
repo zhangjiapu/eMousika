@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="{% static 'student/css/hui.css' %}" />
+<script src="{% static 'student/js/hui.js' %}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="{% static 'student/js/hui-form.js' %}"></script>
+</head>
+<body style="background-color: #ffffff;">
+<div class="hui-wrap">
+	<div class="hui-common-title" style="margin-top:15px;">
+			<div class="hui-common-title-line"></div>
+			<div class="hui-common-title-txt " style="font-size: 40px;">反馈意见</div>
+			<div class="hui-common-title-line"></div>
+		</div>
+
+			<form class="hui-form" id="adviceForm" style="padding: 200px 400px;">
+				
+				<div class="hui-form-items">
+					<div class="hui-form-items-title">意见标题</div>
+					<input type="text" class="hui-input hui-input-clear" name="advice_title" 
+						checkType="string" checkData="1,15" checkMsg="意见标题应为1-15个字符" placeholder="请填写标题"/>
+				</div>
+	
+				<div class="hui-form-items">
+					<div class="hui-form-items-title">意见内容</div>
+					<div class="hui-form-textarea">
+						<textarea name="advice_content" placeholder="请填写意见内容"></textarea>
+					</div>
+				</div>
+	
+				<div class="hui-form-items">
+					<div class="hui-form-items-title">提交人</div>
+					<input type="text" class="hui-input hui-input-clear" name="advice_user" checkType=" string "checkData="1,15" checkMsg="提交人应为1-15个字符 " placeholder="请填写提交人信息"/>
+		    	</div>
+		    	
+		    	<div style="padding:15px 8px; ">
+		            <button type="button" class="hui-button hui-primary hui-fr " id="submitBtn">提交</button>
+		        </div>
+		    	
+		   </form>	
+	
+</div>
+
+<script type="text/javascript">
+
+hui.formInit();
+
+hui('#submitBtn').click(function(){
+    var res = huiFormCheck('#adviceForm');
+    if(res){    	
+    	hui.loading('数据提交中');
+        var data = hui.getFormData('#adviceForm');
+        hui.toast(JSON.stringify(data));
+        hui.closeLoading();
+    }
+});
+
+</script>
+</body>
+</html>
